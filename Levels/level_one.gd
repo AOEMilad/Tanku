@@ -3,8 +3,9 @@ extends Node3D
 const PLAYER = preload("res://Tank/tank.tscn")
 
 func _ready() -> void:
-	if multiplayer.is_server():
-		multiplayer.peer_connected.connect(_on_peer_connected)
+	pass
+	#if multiplayer.is_server():
+		#multiplayer.peer_connected.connect(_on_peer_connected)
 
 func _on_peer_connected(peer_id: int) -> void:
 	spawn_player.rpc(peer_id)

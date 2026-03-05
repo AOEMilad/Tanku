@@ -13,26 +13,9 @@ func start_server() -> void:
 		print("Failed to host: ", error)
 		return
 	multiplayer.multiplayer_peer = enet_peer
-	#multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
+	multiplayer.peer_connected.connect(add_player)
 	print("Server started on port ", PORT)
 
-func start_client() -> void:
-	print("NetworkHandler: Start Client")
-	var error = enet_peer.create_client(IP_ADDRESS, PORT)
-	if error != OK:
-		print("Failed to join: ", error)
-		return
-	
-	#multiplayer.peer_connected.connect(add_player)
-	multiplayer.peer_disconnected.connect(remove_player)
-	multiplayer.connected_to_server.connect(_on_connected_to_server)
-	multiplayer.multiplayer_peer = enet_peer
-	print("Connecting to server...")
-
-func _on_connected_to_server():
-	add_player(multiplayer.get_unique_id())
-	
 func add_player(peer_id: int):
 	if peer_id == 1:
 		return
@@ -43,7 +26,21 @@ func add_player(peer_id: int):
 	#new_player.set_multiplayer_authority(peer_id)
 	#print(get_tree().current_scene.get_node("LevelParent").get_node("LevelOne"))
 	get_tree().current_scene.add_child(new_player, true)
+
+
+func start_client() -> void:
+	print("NetworkHandler: Start Client")
+	var error = enet_peer.create_client(IP_ADDRESS, PORT)
+	if error != OK:
+		print("Failed to join: ", error)
+		return
 	
+	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
+	multiplayer.multiplayer_peer = enet_peer
+	print("Connecting to server...")
+
 func remove_player(peer_id):
 	if peer_id == 1:
 		leave_server()
@@ -64,3 +61,6 @@ func clean_up_signals():
 	multiplayer.peer_disconnected.disconnect(remove_player)
 	multiplayer.connected_to_server.disconnect(_on_connected_to_server)
 	
+
+func _on_connected_to_server():
+	add_player(multiplayer.get_unique_id())
