@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvo5orfyeimi8"]
+
+[ext_resource type="Script" uid="uid://d0qqe7eiogvn0" path="res://UI/main_menu.gd" id="1_8aown"]
+[ext_resource type="Texture2D" uid="uid://63rp3mmxrho1" path="res://Images/Background.png" id="1_uahxu"]
+[ext_resource type="Texture2D" uid="uid://dft6h8eyeueee" path="res://Images/Frame1.png" id="2_b37jj"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("singleplayer_button", "multiplayer_button", "quit_button")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8aown")
+singleplayer_button = NodePath("SinglePlayer_Button")
+multiplayer_button = NodePath("MultiPlayer_Button")
+quit_button = NodePath("Quit_Button")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uahxu")
+
+[node name="Panel" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 507.0
+offset_top = 134.0
+offset_right = 1409.0
+offset_bottom = 824.0
+texture = ExtResource("2_b37jj")
+expand_mode = 1
+
+[node name="SinglePlayer_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.499
+anchor_top = 0.331
+anchor_right = 0.499
+anchor_bottom = 0.331
+offset_left = -375.08
+offset_top = -57.48
+offset_right = 374.92
+offset_bottom = 57.52
+text = "Single Player"
+
+[node name="MultiPlayer_Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.47
+anchor_right = 0.5
+anchor_bottom = 0.47
+offset_left = -377.0
+offset_top = -57.6
+offset_right = 373.0
+offset_bottom = 57.4
+text = "Multi-Player"
+
+[node name="Quit_Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 583.0
+offset_top = 600.0
+offset_right = 1333.0
+offset_bottom = 715.0
+text = "Quit"

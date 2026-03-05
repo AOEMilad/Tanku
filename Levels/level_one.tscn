@@ -1,0 +1,113 @@
+[gd_scene load_steps=12 format=3 uid="uid://c5jh24am8r4vf"]
+
+[ext_resource type="Script" uid="uid://cyttwlu27l0fg" path="res://Levels/level_one.gd" id="1_2b52f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l2luu"]
+size = Vector3(90, 1, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l2luu"]
+size = Vector3(90, 1, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nqmew"]
+size = Vector3(90, 8, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f6rdh"]
+size = Vector3(90, 8, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l3xx8"]
+size = Vector3(1, 8, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_u30rv"]
+size = Vector3(1, 8, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wx4lb"]
+size = Vector3(1, 8, 60)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7pi18"]
+size = Vector3(1, 8, 60)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bjdhr"]
+size = Vector3(90, 8, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xslde"]
+size = Vector3(90, 8, 1)
+
+[node name="LevelOne" type="Node3D"]
+script = ExtResource("1_2b52f")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.612728, 0.790294, 0, -0.790294, 0.612728, 0, 34.4111, 27.5447)
+projection = 1
+size = 53.587
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.915438, 0.402459, 0, -0.402459, 0.915438, 0, 7.14717, 14.0191)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." groups=["Walls"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_l2luu")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_l2luu")
+
+[node name="Top" type="StaticBody3D" parent="." groups=["Walls"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00652802, -29.4922)
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Top"]
+shape = SubResource("BoxShape3D_nqmew")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Top"]
+mesh = SubResource("BoxMesh_f6rdh")
+
+[node name="Left" type="StaticBody3D" parent="." groups=["Walls"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.4835, 0, 0)
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Left"]
+shape = SubResource("BoxShape3D_l3xx8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Left"]
+mesh = SubResource("BoxMesh_u30rv")
+
+[node name="Right" type="StaticBody3D" parent="." groups=["Walls"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.4926, 0, 0)
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Right"]
+shape = SubResource("BoxShape3D_wx4lb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Right"]
+mesh = SubResource("BoxMesh_7pi18")
+
+[node name="Bottom" type="StaticBody3D" parent="." groups=["Walls"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.4943)
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bottom"]
+shape = SubResource("BoxShape3D_bjdhr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bottom"]
+mesh = SubResource("BoxMesh_xslde")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://ds7qujyqdqj08")
+spawn_path = NodePath("../Players")
+
+[node name="Projectiles" type="Node3D" parent="."]
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dvvxckt3gk6c")
+spawn_path = NodePath("../Projectiles")
+
+[node name="SpawnPoint1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.1064, 1.36504, 0)
+
+[node name="SpawnPoint2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5674, 2.1198, 0)

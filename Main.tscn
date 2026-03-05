@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv07xti38p8mr"]
+
+[ext_resource type="Script" uid="uid://j4kagi78ky1i" path="res://main.gd" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://bru4ctf58kmy2" path="res://UI/ui_manager.gd" id="2_fos0i"]
+[ext_resource type="PackedScene" uid="uid://bvo5orfyeimi8" path="res://UI/MainMenu.tscn" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://dd8irg3j11iys" path="res://UI/ModeSelect.tscn" id="3_cm0pq"]
+
+[node name="Main" type="Node3D" node_paths=PackedStringArray("ui_manager", "level_parent")]
+script = ExtResource("1_uu6xs")
+ui_manager = NodePath("UI_Manager")
+level_parent = NodePath("LevelParent")
+
+[node name="UI_Manager" type="CanvasLayer" parent="." node_paths=PackedStringArray("main_menu", "mode_select")]
+script = ExtResource("2_fos0i")
+main_menu = NodePath("MainMenu")
+mode_select = NodePath("ModeSelect")
+
+[node name="MainMenu" parent="UI_Manager" instance=ExtResource("2_r0du0")]
+
+[node name="ModeSelect" parent="UI_Manager" instance=ExtResource("3_cm0pq")]
+visible = false
+
+[node name="LevelParent" type="Node3D" parent="."]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://c5jh24am8r4vf")
+spawn_path = NodePath("../LevelParent")
+spawn_limit = 1

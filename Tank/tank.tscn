@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://ds7qujyqdqj08"]
+
+[ext_resource type="PackedScene" uid="uid://blruay4s3wb3q" path="res://Tank/Top/tank_top.tscn" id="1_bl6pk"]
+[ext_resource type="Script" uid="uid://csruw6nu0qfkt" path="res://Tank/tank.gd" id="1_pn2hw"]
+[ext_resource type="PackedScene" uid="uid://dbpb61vn26wpc" path="res://Models/tanks/TankBaseModel/tank_base.glb" id="3_rlqdg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqxoi"]
+size = Vector3(1.64307, 1, 1.82303)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_aevcn"]
+properties/0/path = NodePath(".:input_direction")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Base:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Top:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[node name="TankBase" type="CharacterBody3D" node_paths=PackedStringArray("collider")]
+script = ExtResource("1_pn2hw")
+collider = NodePath("Base")
+
+[node name="Top" parent="." instance=ExtResource("1_bl6pk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498623, 0)
+
+[node name="FirePoint" parent="Top" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.285453, 1.46734)
+
+[node name="Base" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kqxoi")
+
+[node name="tank_base_model" parent="Base" instance=ExtResource("3_rlqdg")]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, -0.497802, 0)
+
+[node name="ServerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_aevcn")
+
+[editable path="Top"]

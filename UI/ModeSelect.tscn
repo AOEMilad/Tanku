@@ -1,0 +1,70 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd8irg3j11iys"]
+
+[ext_resource type="Texture2D" uid="uid://63rp3mmxrho1" path="res://Images/Background.png" id="1_2nhsv"]
+[ext_resource type="Script" uid="uid://b0girnruf4llk" path="res://UI/mode_select.gd" id="1_tiybf"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_d481l"]
+load_path = "res://.godot/imported/Map.png-a263022a24dbd69b57e0ca574c036f7f.ctex"
+
+[node name="ModeSelect" type="Control" node_paths=PackedStringArray("create_lobby", "join_lobby")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tiybf")
+create_lobby = NodePath("TabContainer/Multi/CreateLobby")
+join_lobby = NodePath("TabContainer/Multi/JoinLobby")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_2nhsv")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 1
+
+[node name="Single" type="Panel" parent="TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Map" type="TextureRect" parent="TabContainer/Single"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CompressedTexture2D_d481l")
+
+[node name="Multi" type="Panel" parent="TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="CreateLobby" type="Button" parent="TabContainer/Multi"]
+layout_mode = 0
+offset_left = 549.0
+offset_top = 405.0
+offset_right = 799.0
+offset_bottom = 555.0
+text = "Create Lobby"
+
+[node name="JoinLobby" type="Button" parent="TabContainer/Multi"]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 407.0
+offset_right = 1278.0
+offset_bottom = 557.0
+text = "Join Lobby"
