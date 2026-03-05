@@ -14,6 +14,7 @@ func start_server() -> void:
 		return
 	multiplayer.multiplayer_peer = enet_peer
 	multiplayer.peer_connected.connect(add_player)
+	multiplayer.peer_disconnected.connect(remove_player)
 	print("Server started on port ", PORT)
 
 func add_player(peer_id: int):
@@ -61,6 +62,5 @@ func clean_up_signals():
 	multiplayer.peer_disconnected.disconnect(remove_player)
 	multiplayer.connected_to_server.disconnect(_on_connected_to_server)
 	
-
 func _on_connected_to_server():
 	add_player(multiplayer.get_unique_id())

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvvxckt3gk6c"]
+[gd_scene load_steps=9 format=3 uid="uid://dvvxckt3gk6c"]
 
 [ext_resource type="Script" uid="uid://c8k1d0rop776a" path="res://Bullet/bullet.gd" id="1_i0cae"]
 
@@ -20,6 +20,11 @@ albedo_texture = SubResource("GradientTexture2D_8xjwj")
 [sub_resource type="SphereMesh" id="SphereMesh_kik8x"]
 material = SubResource("StandardMaterial3D_6vwy2")
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2dao8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="RigidBody3D" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 21
@@ -40,3 +45,6 @@ shape = SubResource("SphereShape3D_02nsw")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("SphereMesh_kik8x")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2dao8")

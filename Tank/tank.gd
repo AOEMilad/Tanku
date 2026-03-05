@@ -8,9 +8,16 @@ extends CharacterBody3D
 @export var damp_when_idle: float = 12.0       # how fast you stop when no input         (originally 12.0)
 
 @export var input_direction: Vector2 = Vector2.ZERO
+@onready var top: MeshInstance3D = %Top
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(int(name))
 
 func _ready():
 	add_to_group("Players")
+
+	if not is_multiplayer_authority():
+		top.set_process(false)
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():

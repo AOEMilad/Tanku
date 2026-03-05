@@ -26,3 +26,9 @@ visible = false
 _spawnable_scenes = PackedStringArray("uid://c5jh24am8r4vf")
 spawn_path = NodePath("../LevelParent")
 spawn_limit = 1
+
+[node name="Projectiles" type="Node3D" parent="."]
+
+[node name="ProjectileSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dvvxckt3gk6c")
+spawn_path = NodePath("../Projectiles")
